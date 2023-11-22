@@ -117,7 +117,11 @@ pub fn init() {
                 Some(rustfmt) => Command::new(rustfmt),
                 None => Command::new("rustfmt"),
             };
-            rustfmt.arg(&out_file).output().unwrap();
+            rustfmt
+                .arg(&out_file)
+                .arg("--config=reorder_imports=false")
+                .output()
+                .unwrap();
         }
     }
 }
