@@ -1444,11 +1444,12 @@ pub fn compile_cdp_json(file_name: &str, commit: &str) -> (Vec<TokenStream>, Vec
         mods.push(quote! {
             pub mod #domain_ident {
 
-                use serde::{Deserialize, Serialize};
-                use serde_json::Value as Json;
                 use super::types::*;
 
                 #(#dependencies)*
+
+                use serde::{Deserialize, Serialize};
+                use serde_json::Value as Json;
 
                 #(#types)*
 
@@ -1464,8 +1465,8 @@ pub fn compile_cdp_json(file_name: &str, commit: &str) -> (Vec<TokenStream>, Vec
                 #(#method_impls)*
 
                 pub mod events {
-                    use serde::{Deserialize, Serialize};
                     use super::super::types::*;
+                    use serde::{Deserialize, Serialize};
 
                     #(#event_objects)*
                 }
