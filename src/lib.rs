@@ -4,7 +4,7 @@ use quote::quote;
 
 use std::env;
 use std::path::Path;
-use std::{fs::OpenOptions, process::Command};
+use std::fs::OpenOptions;
 
 use std::io::prelude::*;
 
@@ -110,19 +110,9 @@ pub fn init() {
             }
         };
 
-        writeln!(file, "{}", modv.to_string()).unwrap();
-
-        if env::var_os("DO_NOT_FORMAT").is_none() {
-            let mut rustfmt = match env::var_os("RUSTFMT") {
-                Some(rustfmt) => Command::new(rustfmt),
-                None => Command::new("rustfmt"),
-            };
-            rustfmt
-                .arg(&out_file)
-                .arg("--config=reorder_imports=false")
-                .output()
-                .unwrap();
-        }
+        let syntax_tree = syn::parse2(modv).unwrap();
+        let content = prettyplease::unparse(&syntax_tree);
+        file.write_all(content.as_bytes()).unwrap();
     }
 }
 

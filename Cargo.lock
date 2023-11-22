@@ -13,10 +13,12 @@ name = "auto_generate_cdp"
 version = "0.4.4"
 dependencies = [
  "convert_case",
+ "prettyplease",
  "proc-macro2",
  "quote",
  "serde",
  "serde_json",
+ "syn",
  "ureq",
 ]
 
@@ -140,6 +142,16 @@ name = "percent-encoding"
 version = "2.3.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "e3148f5046208a5d56bcfc03053e3ca6334e51da8dfb19b6cdc8b306fae3283e"
+
+[[package]]
+name = "prettyplease"
+version = "0.2.15"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "ae005bd773ab59b4725093fd7df83fd7892f7d8eafb48dbd7de6e024e4215f9d"
+dependencies = [
+ "proc-macro2",
+ "syn",
+]
 
 [[package]]
 name = "proc-macro2"
